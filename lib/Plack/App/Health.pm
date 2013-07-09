@@ -72,6 +72,34 @@ __END__
 
 =head1 DESCRIPTION
 
+This L<Plack> app lets you provide a status page for your web app.
+The resulting L<JSON> will look like this:
+
+    {
+        "components" : [
+            {
+                "name" : "Perl",
+                "version" : "5.018000"
+            },
+            {
+                "name" : "Plack",
+                "version" : "1.0028"
+            }
+        ],
+        "services" : [
+            {
+                "name" : "PostgreSQL",
+                "type" : "Database",
+                "status" : "Up"
+            },
+            {
+                "name" : "Web Services",
+                "type" : "API Backend",
+                "status" : "Down"
+            }
+        ]
+    }
+
 =cut
 
 
