@@ -45,6 +45,31 @@ __END__
 
 =head1 SYNOPSIS
 
+    mount '/status' => 'Plack::App::Health' => (
+        components => [
+            { name => 'Perl', version => $] },
+            { name => 'Plack', version => $Plack::VERSION },
+        ],
+        services => [
+            {
+                name => 'PostgreSQL',
+                type => 'Database',
+                status => sub {
+                    my $dbh = ...;
+                    return $dbh->ping ? "Up" : "Down";
+                },
+            },
+            {
+                name => 'Web Services',
+                type => 'Backend API',
+                status => sub {
+                    my $lwp = LWP::UserAgent->new;
+                    return $lwp->get(...)->is_success ? "Up" : "Down";
+                }
+            },
+        ],
+    );
+
 =head1 DESCRIPTION
 
 =cut
